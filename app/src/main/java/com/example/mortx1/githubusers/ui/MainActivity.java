@@ -66,9 +66,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
-
     setSupportActionBar(toolbar);
-
     final ActionBar actionBar = getSupportActionBar();
     actionBar.setHomeAsUpIndicator(ic_menu);
     actionBar.setDisplayHomeAsUpEnabled(true);
@@ -79,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     if (viewPager != null) {
       setupViewPager(viewPager);
     }
+    tabLayout.setupWithViewPager(viewPager);
   }
 
   @Override
@@ -138,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
   private void setupViewPager(ViewPager viewPager) {
     Adapter adapter = new Adapter(getSupportFragmentManager());
-    adapter.addFragment(new ContactListFragment(), "GitHub Users");
+    adapter.addFragment(ContactListFragment.newInstance(1), "GitHub Users");
+    adapter.addFragment(ContactListFragment.newInstance(0), "Last viewed");
     viewPager.setAdapter(adapter);
   }
 
@@ -182,4 +182,8 @@ public class MainActivity extends AppCompatActivity {
       return mFragmentTitles.get(position);
     }
   }
+  public void recentdata(){
+
+  }
+
 }

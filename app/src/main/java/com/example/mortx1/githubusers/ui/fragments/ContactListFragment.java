@@ -15,6 +15,7 @@ import com.example.mortx1.githubusers.data.api.GithubService;
 import com.example.mortx1.githubusers.ui.adapters.SimpleRecyclerViewAdapter;
 import com.example.mortx1.githubusers.data.api.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,6 +29,19 @@ public class ContactListFragment extends Fragment {
 
   @Inject
   GithubService githubService;
+  static private String ARG_MODE = "mode";
+  static public SimpleRecyclerViewAdapter latestAdapter;
+
+  public static ContactListFragment newInstance(int mode) {
+
+    ContactListFragment contactListFragment = new ContactListFragment();
+    Bundle b = new Bundle();
+    b.putInt(ARG_MODE, mode);
+    contactListFragment.setArguments(b);
+
+    return contactListFragment;
+  }
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,8 +57,13 @@ public class ContactListFragment extends Fragment {
     githubService.getUsers().enqueue(new Callback<List<User>>() {
       @Override
       public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-        SimpleRecyclerViewAdapter adapter = new SimpleRecyclerViewAdapter(response.body(), getActivity());
-        recyclerView.setAdapter(adapter);
+        int mode = getArguments().getInt(ARG_MODE);
+        if (mode == 1) {
+           recyclerView.setAdapter(new SimpleRecyclerViewAdapter(response.body(), getActivity(),mode));
+        } else {
+          latestAdapter = new SimpleRecyclerViewAdapter(getLatest(), getActivity(),mode);
+          recyclerView.setAdapter(latestAdapter);
+        }
       }
 
       @Override
@@ -55,6 +74,12 @@ public class ContactListFragment extends Fragment {
     });
 
     return recyclerView;
+  }
+
+  private ArrayList<User> getLatest() {
+    //TODO:get data from shared pref
+    ArrayList<User> users = new ArrayList<>();
+    return users;
   }
 
   @Override

@@ -13,7 +13,9 @@ public class GitHubUsersApp extends Application {
   public void onCreate() {
     super.onCreate();
     mainComponent = DaggerMainComponent.builder()
-        .apiModule(new ApiModule()).build();
+        .apiModule(new ApiModule())
+        .build();
+
   }
 
   public MainComponent getComponent() {

@@ -25,12 +25,13 @@ import retrofit2.Response;
 
 public class ContactDetailActivity extends AppCompatActivity {
 
+  @Inject
+  GithubService githubService;
+
   @BindView(R.id.collapsing_toolbar)
   CollapsingToolbarLayout collapsingToolbarLayout;
   @BindView(R.id.toolbar)
   Toolbar toolbar;
-  @Inject
-  GithubService githubService;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
