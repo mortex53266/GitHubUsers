@@ -61,7 +61,7 @@ public class SimpleRecyclerViewAdapter
     view.setBackgroundResource(mBackground);
     return new ViewHolder(view);
   }
-
+;
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
 
@@ -74,10 +74,8 @@ public class SimpleRecyclerViewAdapter
         if (mode == 1) {
           SharedPreferences mSettings = context.getApplicationContext().getSharedPreferences("latest", Context.MODE_PRIVATE);
           SharedPreferences.Editor editor = mSettings.edit();
-          editor.putString("username", ci.login);
-          editor.putString("avatar_url", ci.avatar_url);
-          editor.putString("user", String.valueOf(contactList));
-          editor.commit();
+          editor.putString("username", ci.login).commit();
+          editor.putString("avatar_url", ci.avatar_url).commit();
           SimpleRecyclerViewAdapter adapter = ContactListFragment.latestAdapter;
           adapter.contactList.add(adapter.contactList.size(),
               new User(mSettings.getString("username", "missing"), mSettings.getString("avatar_url", "missing")));
