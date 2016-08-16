@@ -38,10 +38,8 @@ public class ContactListFragment extends Fragment {
     Bundle b = new Bundle();
     b.putInt(ARG_MODE, mode);
     contactListFragment.setArguments(b);
-
     return contactListFragment;
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,9 +57,9 @@ public class ContactListFragment extends Fragment {
       public void onResponse(Call<List<User>> call, Response<List<User>> response) {
         int mode = getArguments().getInt(ARG_MODE);
         if (mode == 1) {
-           recyclerView.setAdapter(new SimpleRecyclerViewAdapter(response.body(), getActivity(),mode));
+          recyclerView.setAdapter(new SimpleRecyclerViewAdapter(response.body(), getActivity(), mode));
         } else {
-          latestAdapter = new SimpleRecyclerViewAdapter(getLatest(), getActivity(),mode);
+          latestAdapter = new SimpleRecyclerViewAdapter(getLatest(), getActivity(), mode);
           recyclerView.setAdapter(latestAdapter);
         }
       }
@@ -77,7 +75,6 @@ public class ContactListFragment extends Fragment {
   }
 
   private ArrayList<User> getLatest() {
-    //TODO:get data from shared pref
     ArrayList<User> users = new ArrayList<>();
     return users;
   }

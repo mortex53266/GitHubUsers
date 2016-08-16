@@ -47,7 +47,7 @@ public class SimpleRecyclerViewAdapter
     }
   }
 
-  public SimpleRecyclerViewAdapter(List<User> user, Context context,int mode) {
+  public SimpleRecyclerViewAdapter(List<User> user, Context context, int mode) {
 
     this.mode = mode;
     this.contactList = user;
@@ -68,7 +68,6 @@ public class SimpleRecyclerViewAdapter
     final User ci = contactList.get(position);
     holder.mTextView.setText(ci.login);
     Picasso.with(context).load(ci.avatar_url).into(holder.mImageView);
-
     holder.mView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -77,9 +76,11 @@ public class SimpleRecyclerViewAdapter
           SharedPreferences.Editor editor = mSettings.edit();
           editor.putString("username", ci.login);
           editor.putString("avatar_url", ci.avatar_url);
-          editor.apply();
+          editor.putString("user", String.valueOf(contactList));
+          editor.commit();
           SimpleRecyclerViewAdapter adapter = ContactListFragment.latestAdapter;
-          adapter.contactList.add(adapter.contactList.size() , new User(ci.login, ci.avatar_url));
+          adapter.contactList.add(adapter.contactList.size(),
+              new User(mSettings.getString("username", "missing"), mSettings.getString("avatar_url", "missing")));
           if (adapter.contactList.size() >= 6)
             adapter.contactList.remove(0);
           adapter.notifyDataSetChanged();
