@@ -3,6 +3,7 @@ package com.example.mortx1.githubusers;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.mortx1.githubusers.data.DataModule;
 import com.example.mortx1.githubusers.data.api.ApiModule;
 
 public class GitHubUsersApp extends Application {
@@ -14,8 +15,8 @@ public class GitHubUsersApp extends Application {
     super.onCreate();
     mainComponent = DaggerMainComponent.builder()
         .apiModule(new ApiModule())
+        .dataModule(new DataModule(this))
         .build();
-
   }
 
   public MainComponent getComponent() {

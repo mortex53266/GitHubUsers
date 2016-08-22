@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import com.example.mortx1.githubusers.GitHubUsersApp;
 import com.example.mortx1.githubusers.R;
+import com.example.mortx1.githubusers.data.LatestGitHubPrefs;
 import com.example.mortx1.githubusers.data.api.GithubService;
-import com.example.mortx1.githubusers.ui.adapters.SimpleRecyclerViewAdapter;
 import com.example.mortx1.githubusers.data.api.models.User;
+import com.example.mortx1.githubusers.ui.adapters.SimpleRecyclerViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,6 +29,10 @@ public class ContactListFragment extends Fragment {
 
   @Inject
   GithubService githubService;
+
+  @Inject
+  LatestGitHubPrefs latestGitHubPrefs;
+
   static private String ARG_MODE = "mode";
   static public SimpleRecyclerViewAdapter latestAdapter;
 
@@ -74,9 +78,8 @@ public class ContactListFragment extends Fragment {
     return recyclerView;
   }
 
-  private ArrayList<User> getLatest() {
-    ArrayList<User> users = new ArrayList<>();
-    return users;
+  public List<User> getLatest() {
+    return (List<User>) latestGitHubPrefs.getList();
   }
 
   @Override

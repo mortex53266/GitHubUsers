@@ -14,7 +14,9 @@ import com.example.mortx1.githubusers.R;
 import com.example.mortx1.githubusers.data.api.GithubService;
 import com.example.mortx1.githubusers.data.api.models.User;
 import com.squareup.picasso.Picasso;
+
 import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -28,6 +30,7 @@ public class ContactDetailActivity extends AppCompatActivity {
 
   @BindView(R.id.collapsing_toolbar)
   CollapsingToolbarLayout collapsingToolbarLayout;
+
   @BindView(R.id.toolbar)
   Toolbar toolbar;
 

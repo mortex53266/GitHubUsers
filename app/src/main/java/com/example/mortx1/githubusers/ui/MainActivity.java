@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+//    SaveSimpleList();
+//    getList();
+
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
     final ActionBar actionBar = getSupportActionBar();
@@ -182,8 +186,29 @@ public class MainActivity extends AppCompatActivity {
       return mFragmentTitles.get(position);
     }
   }
-  public void recentdata(){
-
-  }
-
+//
+//  public void SaveSimpleList(){
+//    List<User> myList=new ArrayList<User>();
+//    User entry1=new User("gholi", "love.com");
+//    User entry2=new User("hasan", "love2.com");
+//    myList.add(entry1);
+//    myList.add(entry2);
+//
+//    SharedPreferences appSharedPrefs = PreferenceManager
+//        .getDefaultSharedPreferences(this.getApplicationContext());
+//    SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+//    Gson gson = new Gson();
+//    String json = gson.toJson(myList);
+//    prefsEditor.putString("MyList", json);
+//    prefsEditor.commit();
+//  }
+//
+//  public  List<User> getList(){
+//    SharedPreferences appSharedPrefs = PreferenceManager
+//        .getDefaultSharedPreferences(this.getApplicationContext());
+//    Gson gson = new Gson();
+//    String json = appSharedPrefs.getString("MyList", "");
+//    Type type = new TypeToken<List<User>>(){}.getType();
+//    return gson.fromJson(json, type);
+//  }
 }
