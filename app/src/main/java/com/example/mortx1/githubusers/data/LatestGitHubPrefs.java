@@ -17,7 +17,7 @@ public class LatestGitHubPrefs {
   public SharedPreferences sharedPreferences;
   public final String key;
   public final List<User> defaultList;
-  public  Context context;
+  public Context context;
 
   public LatestGitHubPrefs(SharedPreferences sharedPreferences, String key, List<User> defaultList) {
     this.sharedPreferences = sharedPreferences;
@@ -32,30 +32,21 @@ public class LatestGitHubPrefs {
   }
 
   public List<User> getList() {
-      Gson gson = new Gson();
-      String json = sharedPreferences.getString(key, "");
-      Type type = new TypeToken<List<User>>() {
-      }.getType();
-
-      if (json.isEmpty()) {
-        if (defaultList == null) {
-          return Collections.EMPTY_LIST;
-        }
-      }
-      List<User> latestUsers= gson.fromJson(json, type);
-      if (latestUsers == null){
-        return Collections.EMPTY_LIST;
-      }
-        return (ArrayList)latestUsers;
-    }
+    Gson gson = new Gson();
+    String json = sharedPreferences.getString(key, "");
+    Type type = new TypeToken<List<User>>() {
+    }.getType();
+    List<User> latestUsers = gson.fromJson(json, type);
+    if(latestUsers != null && latestUsers.size() > 0)
+      return (ArrayList) latestUsers;
+    else
+      return new ArrayList<>();
+  }
 
   public void setList(User latestUsers) {
     List<User> myList = getList();
-        myList.add(latestUsers);
-//    if (myList == null) {
-//      myList = Collections.EMPTY_LIST;
-//    }
-    if (myList.size() > 5){
+    myList.add(latestUsers);
+    if (myList.size() > 5) {
       myList.remove(0);
     }
     SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
@@ -67,8 +58,8 @@ public class LatestGitHubPrefs {
 
   public boolean isSet() {
 
-    if (getList() == null ) {
-        return false;
+    if (getList() == null) {
+      return false;
     }
     return true;
   }
