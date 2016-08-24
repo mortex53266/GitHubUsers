@@ -58,14 +58,10 @@ public class LatestGitHubPrefs {
 
   public boolean isSet() {
 
-    if (getList() == null) {
-      return false;
-    }
     return true;
   }
 
   public void delete() {
-    getList().clear();
 
   }
 }
